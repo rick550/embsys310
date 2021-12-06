@@ -7,7 +7,6 @@
 
 // ************ Using CMSIS ************ //
 #if 1
-volatile int counter=0;
 
 void main(void)
 {     
@@ -17,14 +16,18 @@ void main(void)
     // Set bit[1] to 1
     // 1. Enable clock to Peripheral
     
-    RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
-    
+    //RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
+    RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
     // GPIO port mode register (GPIOx_MODER) (x = A..E and H)
     // GPIOB Base Address: 0x48000400
     // Address offset: 0x00
     // Set bit[29:28] to 0x01  so --> 0x400 // To enable PB14 as output
-    GPIOB->MODER &= ~GPIO_MODER_MODE14_1;
-    GPIOB->MODER |= GPIO_MODER_MODE14_0;
+    //GPIOB->MODER &= ~GPIO_MODER_MODE14_1;
+    //GPIOB->MODER |= GPIO_MODER_MODE14_0;
+    
+    // Set bit[11:10] to 0x01 so --> 0x400
+    GPIOA->MODER &= ~GPIO_MODER_MODE5_1;
+    GPIOA->MODER |= GPIO_MODER_MODE5_0;
     
     // GPIO port output data register (GPIOx_ODR) (x = A..E and H)
     // GPIOB Base Address: 0x48000400
@@ -34,10 +37,10 @@ void main(void)
     
     while(1)
     {
-        GPIOB->ODR |= GPIO_ODR_OD14;
+        GPIOA->ODR |= GPIO_ODR_OD5;
         delay(100000);
         
-        GPIOB->ODR &= ~GPIO_ODR_OD14;
+        GPIOA->ODR &= ~GPIO_ODR_OD5;
         delay(100000);
     }    
 #endif
