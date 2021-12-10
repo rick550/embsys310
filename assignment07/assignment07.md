@@ -1,6 +1,7 @@
 2. Generate the map file for your program and provide details on: 
 a. How much total ROM your program is occupying? 
-
+Total ROM is 344 bytes for read-only code and 92 bytes for read-only data
+for a total of 436 bytes for ROM
 
 b. How much total RAM your program is using? 
 Total RAM used is 4 bytes
